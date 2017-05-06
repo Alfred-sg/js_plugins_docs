@@ -124,6 +124,5 @@ keygrip通过node内置模块crypto的createHmac加密数据、比较密文、�
 	
 ## 参考
 
-[浅谈nodejs中的Crypto模块](https://cnodejs.org/topic/504061d7fef591855112bab5)
-
-[详解Node.js API系列 Crypto加密模块](http://blog.csdn.net/youyudehexie/article/details/12040797)
+* [浅谈nodejs中的Crypto模块](https://cnodejs.org/topic/504061d7fef591855112bab5)
+* [详解Node.js API系列 Crypto加密模块](http://blog.csdn.net/youyudehexie/article/details/12040797)
