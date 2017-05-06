@@ -164,6 +164,11 @@ use方法挂载中间件；createContext方法生成中间件执行上下文对�
 	    request.response = response;
 	    response.request = request;
 	    context.originalUrl = request.originalUrl = req.url;// 原始的请求地址
+	    
+	    // 用于校验请求头的cookie、设置响应头的cookie
+	    // this.cookies.get(name,[{signed:true}]) 无signed直接取值
+	    // 		有signed，比较name+".sig"是否匹配this.keys加密后的密文，不匹配，无返回值，匹配，取name的值
+	    // this.cookies.set(name,value,[{signed:true}]) signed为真，同时发送name+".sig"密文
 	    context.cookies = new Cookies(req, res, {// 设置cookies签名
 	      keys: this.keys,
 	      secure: request.secure
