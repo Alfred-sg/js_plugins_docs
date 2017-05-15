@@ -18,6 +18,14 @@
 
 * 冻结的空对象。
 
+#### nullthrows
+
+* nullthrows(arg)，首参arg不为null或undefined时，直接抛出；否则报"Got unexpected null or undefined"错误。
+
+#### sprintf
+
+* sprintf(format)，以次参等替换首参format字符串中的%s后输出。
+
 ### 转译相关
 
 #### shouldPolyfillES6Collection
@@ -72,6 +80,10 @@
 
 * groupArray(array,fn)，遍历array，执行回调fn.call(array,array[ii],ii)，以获取分组的属性名，将array打包分组。
 
+#### partitionArray
+
+* partitionArray(array,predicate,context)，遍历array，执行回调predicate.call(context,array[ii],ii,array)；将数组array中匹配与不匹配predicate回调的元素分成两组后以数组形式返回。
+
 #### removeFromArray
 
 * removeFromArray(array,element)，从数组array中移除元素element。
@@ -82,9 +94,41 @@
 
 * forEachObject(object,callback,context)，遍历object对象的属性，以context作为上下文执行callback函数。
 
+#### mapObject
+
+* mapObject(object,callback,context)，遍历object对象的属性，以context作为上下文执行callback函数。不同于forEachObject函数的无返回值，mapObject以对象形式输出回调callback执行结果。
+
 #### everyObject
 
 * everyObject(object,callback,context)，遍历object对象的属性，以context作为上下文执行callback函数；当callback返回否值时，遍历终止。
+
+#### someObject
+
+* someObject(object,callback,context)，遍历object对象的属性，以context作为上下文执行callback函数；雷同[].some(fn)，某属性在调用callback返回真值，则最终输出true；否则为false。
+
+#### filterObject
+
+* filterObject(object,callback,context)，遍历object对象的属性，以context作为上下文执行callback函数；雷同[].filter(fn)，callback返回真值，则最终输出对象中保留对象obj的属性。
+
+#### partitionObject
+
+* partitionObject(object,predicate,context)，遍历object对象的属性，以context作为上下文执行predicate函数；将匹配与不匹配predicate回调的object属性分为两组，构成数组形式后输出。
+
+#### partitionObjectByKey
+
+* partitionObjectByKey(source,whitelist)，借助partitionObject遍历source对象的属性，将包含在与不包含在白名单whitelist中的object属性分为两组，构成数组形式后输出。
+
+#### keyOf
+
+* keyOf(oneKeyObj)，返回单属性对象oneKeyObj的属性，或null。
+
+#### keyMirror
+
+* keyMirror(obj)，等同Object.keys(obj)获取对象的属性，却以对象形式返回对象的属性到其自身的映射。
+
+#### keyMirrorRecursive
+
+* keyMirrorRecursive(obj,prefix)，加前缀prefix获取对象属性到属性的映射；若为深度嵌套形式，则映射为属性到值对象映射属性对象。
 
 #### countDistinct
 
