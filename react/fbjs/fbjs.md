@@ -4,6 +4,26 @@
 
 ### 基本
 
+#### invariant
+
+* invariant(condition,format,a,b,c,d,e,f)，condition为否值时，以处理"%s"字符后的format字符串信息报错。
+
+#### warning
+
+* warning(condition,format)，非production环境下，condition为否值时，以处理"%s"字符后的format字符串信息报错，以查找堆栈信息；production环境下，不作处理。
+
+#### memoizeStringOnly
+
+* memoizeStringOnly(callback)，返回(key)=>{}，调用callback回调设置cache[key]闭包缓存、或者获取cache[key]闭包缓存。
+
+#### xhrSimpleDataSerializer
+
+* xhrSimpleDataSerializer(data)，将数组或对象data转换为查询字符串输出，如key=value；实际查询字符串需要data[key]=value。
+
+#### URI
+
+* new URI(uri)，创建URI实例，toString方法获取uri。
+
 #### emptyFunction
 
 * emptyFunction()，调用时返回undefined。
@@ -26,6 +46,7 @@
 
 * sprintf(format)，以次参等替换首参format字符串中的%s后输出。
 
+
 ### 转译相关
 
 #### shouldPolyfillES6Collection
@@ -42,6 +63,8 @@
 
 * crc32(str)，crc32冗余校验码，用于判断写入镜像文件的数据取出时是否损坏。
 
+
+
 ## 数据转换
 
 ### 字符串
@@ -53,6 +76,7 @@
 #### hyphenate
 
 * hyphenate(string)，将参数string从小驼峰式书写形式转化为连字符书写。
+
 
 ### 数组
 
@@ -87,6 +111,7 @@
 #### removeFromArray
 
 * removeFromArray(array,element)，从数组array中移除元素element。
+
 
 ### 对象
 
@@ -133,10 +158,31 @@
 #### countDistinct
 
 * countDistinct(iter,selector)，通过selector转换迭代器iter中各迭代值后，通过Set类型后计数。
+
+
+### 判断比较
+
+#### isEmpty
+
+* isEmpty(object|array|...)，用于判断对象、数组为空，非普通数据类型非否值；不能判断迭代器。
+
+#### minBy
+
+* minBy(iterator,transform,compare)，遍历迭代器iterator，将迭代值传入transform转换函数中，以获取比较值，通过比较函数compare作比较，输出最小比较值对应的迭代值。compare函数默认为数值比较。
+
+#### maxBy
+
+* maxBy(iterator,transform,compare)，基于minBy，设置compare，输出最大比较值对应的迭代值。compare函数默认为数值比较。
+
+#### shallowEqual
+
+* shallowEqual(a,b)，当a、b为普通数据类型时，比较值相等；为数组或对象，比较数组长度、属性个数是否相等，通过"==="浅比较首层数组项是否相等。
     
 #### areEqual
 
 * areEqual(a,b)，校验a、b是否完全值相等。
+
+
 
 ## DOM-BOM处理
 
@@ -149,6 +195,7 @@
 * ExecutionEnvironment.canUseEventListeners，能否使用浏览器的事件接口。
 * ExecutionEnvironment.canUseViewport，判断是否可以获取屏幕信息。
 * ExecutionEnvironment.isInWorker，是否在webworker线程中。
+
 
 ### 节点操作
 
@@ -164,15 +211,24 @@
 
 * createNodesFromMarkup(markup, handleScript)，markup以html形式设置子节点，并返回子节点node对象集合nodeList；handleScript为真值允许设置script节点，并以函数形式处理script节点。
 
+#### focusNode
+
+* focusNode(node)，使node节点获得焦点。
+
+#### getActiveElement
+
+* getActiveElement()，输出页面中获得焦点的元素，或者document.body，或者null。
+
+#### isNode
+
+* isNode(node)，判断node是否dom节点。
+
+#### isTextNode
+
+* isTextNode(node)，基于isNode函数，判断node是否文本节点。
+
+
 ### 样式
-
-#### camelizeStyleName
-
-* camelizeStyleName(style)，将连字符书写的样式名转化为小驼峰式，特别将"-ms-"起始的样式名转化成以"ms"起始。
-
-#### hyphenateStyleName
-
-* hyphenateStyleName(style)，将小驼峰式书写的样式名转化为连字符式，特别将"ms-"起始的样式名转化成以"-ms-"起始。
 
 #### joinClasses
 
@@ -190,6 +246,55 @@
 * conditionClass(element,className,bool)，按条件bool的真假，为元素element添加或移除样式className。
 * hasClass(element,className)，判断元素element是否包含样式className。
 * matchesSelector(element,selector)，判断元素element是否匹配选择器selector。
+
+#### camelizeStyleName
+
+* camelizeStyleName(style)，将连字符书写的样式名转化为小驼峰式，特别将"-ms-"起始的样式名转化成以"ms"起始。
+
+#### hyphenateStyleName
+
+* hyphenateStyleName(style)，将小驼峰式书写的样式名转化为连字符式，特别将"ms-"起始的样式名转化成以"-ms-"起始。
+
+#### getStyleProperty
+
+* getStyleProperty(node,styleName)，获取node节点的styleName样式。
+
+#### Style
+
+* Style.get(node,styleName)，获取node节点的styleName样式。
+* Style.getScrollParent(node)，向上获取首个滚动的父元素，包含其自身。
+
+#### Scroll
+
+* Scroll.getTop(node)，获取上下滚动偏移量。
+* Scroll.setTop(node)，设置上下滚动偏移量。
+* Scroll.getLeft(node)，获取左右滚动偏移量。
+* Scroll.setLeft(node)，设置左右滚动偏移量。
+
+#### getDocumentScrollElement
+
+* getDocumentScrollElement()，为滚动取值获取文档节点；getScrollPosition函数中使用。
+
+#### getUnboundedScrollPosition
+
+* getUnboundedScrollPosition(scrollable)，获取scrollable滚动节点的偏移量或window对象的pageOffset属性，以{x,y}输出；getScrollPosition模块中使用。
+
+#### getScrollPosition
+
+* getScrollPosition(scrollable)，获取滚动节点scrollable的偏移量，{x,y}形式输出。
+
+
+### 事件
+
+#### EventListener
+
+* EventListener.listen(target,eventType,callback)，非捕获模式绑定事件，返回值用于解绑事件。
+* EventListener.capture(target,eventType,callback)，捕获模式绑定事件，返回值用于解绑事件，IE不支持捕获模式。
+* EventListener.registerDefault()，空操作。
+
+#### monitorCodeUse
+
+* monitorCodeUse(eventName,data)，检测eventName只包含[^a-z0-9_]字符。
 
 
 
