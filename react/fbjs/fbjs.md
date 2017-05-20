@@ -58,7 +58,19 @@
 
 #### Promise
 
-* new Promise((resolve,reject)=>{})，调用promise模块构建延迟对象。
+* new Promise((resolve,reject)=>{})，调用promise模块构建延迟对象，含node端方法。
+
+#### promise.native
+
+* new Promise((resolve,reject)=>{})，调用promise模块构建延迟对象，只包含浏览器端方法。
+
+#### Deferred
+
+* new Deferred()，以jquery方式处理异步逻辑。
+
+#### PromiseMap
+
+* new PromiseMap()，以key键构建多个deferred实例，处理异步逻辑。
 
 
 ### 编码相关
