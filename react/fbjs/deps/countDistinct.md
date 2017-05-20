@@ -1,6 +1,6 @@
 # countDistinct
 
-countDistinct(iter,selector)，通过selector转换迭代器iter中各迭代值后，通过Set类型后计数。
+countDistinct(iter,selector)，通过selector转换迭代器iter中各迭代值后，通过Set类型后以去重形式计数。
 
     'use strict';
 

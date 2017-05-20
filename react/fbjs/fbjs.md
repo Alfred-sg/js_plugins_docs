@@ -132,6 +132,10 @@
 
 * removeFromArray(array,element)，从数组array中移除元素element。
 
+#### distinctArray
+
+* distinctArray(arr)，通过arr类型将xs数组去重后返回。
+
 
 ### 对象
 
@@ -175,9 +179,49 @@
 
 * keyMirrorRecursive(obj,prefix)，加前缀prefix获取对象属性到属性的映射；若为深度嵌套形式，则映射为属性到值对象映射属性对象。
 
+
+### Set类型
+
+#### Set
+
+* 利用'core-js'模块构建Set类型。
+
+#### someSet
+
+* someSet(set,predicate,context)，遍历set，当有成员匹配predicate.bind(context)时，返回真值；否则返回否值。
+
+#### everySet
+
+* everySet(set,predicate,context)，遍历set，当所有成员均匹配predicate.bind(context)时，返回真值；否则返回否值。
+
+#### equalsSet
+
+* equalsSet(a,b)，比较两个set实例a、b是否等值。
+
+### Map类型 
+
+#### Map
+
+* new Map()，利用'core-js'模块构建Map类型。
+
+
+### interator迭代器
+
+#### enumerate
+
+* enumerate["KIND_KEYS"|"KIND_VALUES"|"KIND_ENTRIES"]，获取迭代类型常数"keys"|"values"|"entries"。
+* enumerate.keys(data)，获取键迭代器；字符串无，数组序号，对象键，或默认迭代器。
+* enumerate.values(data)，获取值迭代器；字符串字符，数组项，对象值，或默认迭代器。
+* enumerate.entries(data)，获取键、值迭代器；字符串无，数组序号加元素，对象键加值，或默认迭代器。
+* enumerate.generic(object)，获取对象的属性、值迭代器。
+
+#### equalsIterable
+
+* equalsIterable(iter1,iter2,areEqual=(item1,item2)=>{})，通过areEqual判断两个迭代器的数据是否相同；默认判断各迭代值相同，可通过areEqual改写比较逻辑。
+
 #### countDistinct
 
-* countDistinct(iter,selector)，通过selector转换迭代器iter中各迭代值后，通过Set类型后计数。
+* countDistinct(iter,selector)，通过selector转换迭代器iter中各迭代值后，通过Set类型后以去重形式计数。
 
 
 ### 判断比较
@@ -303,6 +347,19 @@
 
 * getScrollPosition(scrollable)，获取滚动节点scrollable的偏移量，{x,y}形式输出。
 
+#### getElementRect
+
+* getElementRect(elem)，获取elem节点四周边际离页面上、左边际的距离，{top,bottom,left,right}形式。
+
+#### getElementPosition
+
+* getElementPosition(elem)，获取elem节点距离页面上、左边际的距离，以及节点的宽、高。
+
+#### getViewportDimensions
+
+* getViewportDimensions()，获取页面的宽高，包含滚动条。
+* getViewportDimensions.withoutScrollbars()，获取页面的宽高，不包含滚动条。
+
 
 ### 事件
 
@@ -315,6 +372,10 @@
 #### monitorCodeUse
 
 * monitorCodeUse(eventName,data)，检测eventName只包含[^a-z0-9_]字符。
+
+#### Keys
+
+* 通过键盘按键获取对应的键盘码，如Keys.ESC=27。
 
 
 
