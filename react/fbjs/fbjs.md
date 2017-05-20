@@ -53,6 +53,14 @@
 
 * shouldPolyfillES6Collection("Map"|"Set")，校验浏览器平台是否需要通过babel等转译后，才能支持Map、Set类型，及该类型的next迭代、keys、forEach、clear等方法。
 
+
+### 异步处理
+
+#### Promise
+
+* new Promise((resolve,reject)=>{})，调用promise模块构建延迟对象。
+
+
 ### 编码相关
 
 #### base62
