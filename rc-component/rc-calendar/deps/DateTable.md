@@ -1,10 +1,14 @@
-# DateTable
+# DateTable、DateTHead、DateTBody
 
-## 概述
+DateTable组件调用DateTHead、DateTBody组件绘制浮层日期选择节点。
+
+## DateTable
+
+### 概述
 
 绘制浮层日期选择组件。
 
-## props属性设置
+### props属性设置
 
 * 影响DateTHead组件：
 * prefixCls，样式类前缀
@@ -23,7 +27,7 @@
 * onSelect(moment)，浮层内日期选择组件点选时执行函数
 * onDayHover(moment)，浮层内日期选择组件鼠标移入时执行函数
 
-## 源码
+### 源码
 
     'use strict';
     
@@ -94,19 +98,19 @@
 
 
 
-# DateTHead
+## DateTHead
 
-## 概述
+### 概述
 
 绘制日期选择组件下，浮层内星期显示组件。
 
-## props属性设置
+### props属性设置
 
 * prefixCls，样式类前缀
 * value，获取moment对象的语言包，用于设置星期
 * showWeekNumber，绘制星期数时，添加th留空
 
-## 源码
+### 源码
 
     'use strict';
     
@@ -216,13 +220,13 @@
 
 
 
-# DateTBody
+## DateTBody
 
-## 概述
+### 概述
 
 绘制日期选择组件下，浮层内日期点选组件。
 
-## props属性设置
+### props属性设置
 
 * prefixCls，样式类前缀
 * showWeekNumber，是否绘制日期选择组件中的星期节点，即["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
@@ -235,7 +239,7 @@
 * onSelect(moment)，浮层内日期选择组件点选时执行函数
 * onDayHover(moment)，浮层内日期选择组件鼠标移入时执行函数
 
-## 源码
+### 源码
 
     'use strict';
     
@@ -517,4 +521,20 @@
     // onSelect(moment)，浮层内日期选择组件点选时执行函数
     // onDayHover(moment)，浮层内日期选择组件鼠标移入时执行函数
     exports["default"] = DateTBody;
+    module.exports = exports['default'];
+
+
+## DateConstants
+
+常数
+
+    "use strict";
+    
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports["default"] = {
+      DATE_ROW_COUNT: 6,
+      DATE_COL_COUNT: 7
+    };
     module.exports = exports['default'];
