@@ -22,11 +22,11 @@
 * value，选中的日期、以及获取moment对象的语言包、以显示星期名
 * prefixCls，样式类前缀
 * showTimePicker，是否显示时分秒选择组件
-* onValueChange(moment)，浮层内头部年、月点选节点改变值时执行函数
+* onValueChange(moment)，浮层内头部年、月点选节点改变值时执行函数，年份、月份选择面板点选时执行
  
 * 影响timePicker时分秒组件的props属性：
 * timePicker，以节点形式作为时分秒组件渲染，同时其props属性设置时分选择组件的props
-* disabledTime=(value)=>{}，返回值作为props.defaultDisabledTime属性设置props
+* disabledTime=(value)=>{}，返回值作为props.defaultDisabledTime属性设置时分选择组件的props
 * timePickerDisabledTime，设置时分选择组件的props
 * onInputSelect(moment|null)，浮层内输入框值改变时执行函数
 * value，选中的日期、以及获取moment对象的语言包、以显示星期名
@@ -154,9 +154,9 @@
     
             // 浮层内日期选择组件头部年、月点选节点
             _react2["default"].createElement(_CalendarHeader2["default"], (0, _extends3["default"])({}, newProps, {
-              enableNext: direction === 'right',
-              enablePrev: direction === 'left',
-              onValueChange: props.onValueChange
+              enableNext: direction === 'right',// 下一年、下一月点选按钮是否显示
+              enablePrev: direction === 'left',// 上一年、上一月点选按钮是否显示
+              onValueChange: props.onValueChange// 改变选中的日期对象，年份、月份选择面板点选时执行
             })),
     
             // 显示时分秒选择组件
@@ -205,7 +205,7 @@
     // value，选中的日期、以及获取moment对象的语言包、以显示星期名
     // prefixCls，样式类前缀
     // showTimePicker，是否显示时分秒选择组件
-    // onValueChange(moment)，浮层内头部年、月点选节点改变值时执行函数
+    // onValueChange(moment)，浮层内头部年、月点选节点改变值时执行函数，年份、月份选择面板点选时执行
     // 
     // 影响timePicker时分秒组件的props属性：
     // timePicker，以节点形式作为时分秒组件渲染，同时其props属性设置时分选择组件的props
