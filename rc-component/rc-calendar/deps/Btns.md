@@ -1,4 +1,6 @@
-# Btns
+# TodayButton、TimePickerButton、OkButton
+
+TodayButton今天按钮，TimePickerButton日期、时分秒选择面板切换按钮、OkButton确认按钮。
 
 ## TodayButton
 
@@ -75,7 +77,7 @@
 
 ### 概述
 
-绘制日期、时间面板切换按钮。
+绘制日期、时分秒选择面板切换按钮。
 
 ### props属性
 
