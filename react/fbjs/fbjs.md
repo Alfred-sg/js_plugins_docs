@@ -46,6 +46,18 @@
 
 * sprintf(format)，以次参等替换首参format字符串中的%s后输出。
 
+#### setImmediate
+
+* setImmediate(callback,...args)，等待强业务逻辑函数执行完成后，运行callback回调。
+
+#### resolveImmediate
+
+* resolveImmediate(callback)，通过promise机制执行callback回调函数。
+
+#### ErrorUtils
+
+* 调用函数报错时供抛出堆栈使用。
+
 
 ### 转译相关
 
@@ -259,6 +271,14 @@
 * ExecutionEnvironment.canUseEventListeners，能否使用浏览器的事件接口。
 * ExecutionEnvironment.canUseViewport，判断是否可以获取屏幕信息。
 * ExecutionEnvironment.isInWorker，是否在webworker线程中。
+
+#### performance
+
+通过window.performance作性能检测用。
+
+#### performanceNow
+
+performanceNow()，获取页面开始加载到js代码执行时的时间戳，可用于计算代码执行的耗时。
 
 
 ### 节点操作
