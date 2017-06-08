@@ -1,0 +1,97 @@
+# fetchWithRetries
+
+fetchWithRetries(url,{fetchTimeout,retryDelays})请求失败或超时后，尝试重新发送请求。参数fetchTimeout设定超时时间，超时尝试重新发送请求；参数retryDelays的长度限定尝试发送请求的次数，值限定尝试请求与上一次请求的时间间隔。
+
+    'use strict';
+    
+    var Promise = require('./Promise');
+    
+    function _objectWithoutProperties(obj, keys) { 
+      var target = {}; 
+      for (var i in obj) { 
+        if (keys.indexOf(i) >= 0) continue; 
+        if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; 
+        target[i] = obj[i]; 
+      } 
+      return target; 
+    }
+    
+    var ExecutionEnvironment = require('./ExecutionEnvironment');
+    
+    var sprintf = require('./sprintf');
+    var fetch = require('./fetch');
+    var warning = require('./warning');
+    
+    var DEFAULT_TIMEOUT = 15000;
+    var DEFAULT_RETRIES = [1000, 3000];
+    
+    // fetchWithRetries(url,{fetchTimeout,retryDelays})请求失败或超时后，尝试重新发送请求
+    function fetchWithRetries(uri, initWithRetries) {
+      var _ref = initWithRetries || {},
+          fetchTimeout = _ref.fetchTimeout,
+          retryDelays = _ref.retryDelays,
+          init = _objectWithoutProperties(_ref, ['fetchTimeout', 'retryDelays']);
+    
+      // 超时时间，超时尝试重新发送请求
+      var _fetchTimeout = fetchTimeout != null ? fetchTimeout : DEFAULT_TIMEOUT;
+      // 长度限定尝试发送请求的次数，值限定尝试请求与上一次请求的时间间隔
+      var _retryDelays = retryDelays != null ? retryDelays : DEFAULT_RETRIES;
+    
+      var requestsAttempted = 0;
+      var requestStartTime = 0;
+      return new Promise(function (resolve, reject) {
+        function sendTimedRequest() {
+          requestsAttempted++;
+          requestStartTime = Date.now();
+          var isRequestAlive = true;
+          var request = fetch(uri, init);
+          var requestTimeout = setTimeout(function () {
+            isRequestAlive = false;
+            if (shouldRetry(requestsAttempted)) {
+              process.env.NODE_ENV !== 'production' ? warning(false, 'fetchWithRetries: HTTP timeout, retrying.') : void 0;
+              retryRequest();
+            } else {
+              reject(new Error(sprintf('fetchWithRetries(): Failed to get response from server, ' + 'tried %s times.', requestsAttempted)));
+            }
+          }, _fetchTimeout);
+    
+          request.then(function (response) {
+            clearTimeout(requestTimeout);
+            if (isRequestAlive) {
+              if (response.status >= 200 && response.status < 300) {
+                resolve(response);
+              } else if (shouldRetry(requestsAttempted)) {
+                process.env.NODE_ENV !== 'production' ? warning(false, 'fetchWithRetries: HTTP error, retrying.') : void 0;
+                retryRequest();
+              } else {
+                var error = new Error(sprintf('fetchWithRetries(): Still no successful response after ' + '%s retries, giving up.', requestsAttempted));
+                error.response = response;
+                reject(error);
+              }
+            }
+          })['catch'](function (error) {
+            clearTimeout(requestTimeout);
+            if (shouldRetry(requestsAttempted)) {
+              retryRequest();
+            } else {
+              reject(error);
+            }
+          });
+        }
+    
+        function retryRequest() {
+          var retryDelay = _retryDelays[requestsAttempted - 1];
+          var retryStartTime = requestStartTime + retryDelay;
+          // Schedule retry for a configured duration after last request started.
+          setTimeout(sendTimedRequest, retryStartTime - Date.now());
+        }
+    
+        function shouldRetry(attempt) {
+          return ExecutionEnvironment.canUseDOM && attempt <= _retryDelays.length;
+        }
+    
+        sendTimedRequest();
+      });
+    }
+    
+    module.exports = fetchWithRetries;

@@ -99,6 +99,16 @@
 
 ## 数据转换
 
+### 数据交互
+
+#### fetch
+
+* fetch(url, options)，调用node-fetch模块实现node端发送请求；调用whatwg-fetch实现客户端发送ajax请求。
+
+#### fetchWithRetries
+
+* fetchWithRetries(url,{fetchTimeout,retryDelays})请求失败或超时后，尝试重新发送请求。参数fetchTimeout设定超时时间，超时尝试重新发送请求；参数retryDelays的长度限定尝试发送请求的次数，值限定尝试请求与上一次请求的时间间隔。
+
 ### 字符串
 
 #### camelize
