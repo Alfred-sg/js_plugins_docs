@@ -85,6 +85,13 @@
 * new PromiseMap()，以key键构建多个deferred实例，处理异步逻辑。
 
 
+### 版本号
+
+#### VersionRange
+
+* VersionRange.contains(range,version)，判断实际版本号version是否在range范围中。
+
+
 ### 编码相关
 
 #### base62
@@ -95,11 +102,26 @@
 
 * crc32(str)，crc32冗余校验码，用于判断写入镜像文件的数据取出时是否损坏。
 
+#### TokenizeUtil
+
+* TokenizeUtil.getPunctuation()，获取标点符号的匹配正则。
+
+#### UnicodeUtils
+
+* UnicodeUtils.getCodePoints(str)，从字符串转化成unicode字符集数组。
+* UnicodeUtils.getUTF16Length(str,pos)，BMP字符集[U+0000..U+D7FF]或[U+E000, U+FFFF]返回1，非BMP字符集[U+D800..U+DFFF]返回2。
+* UnicodeUtils.hasSurrogateUnit(str)，判断是否含有非BMP字符集。
+* UnicodeUtils.isCodeUnitInSurrogateRange(codeUnit)，判断字符codeUnit是否非BMP字符集[U+D800..U+DFFF]。
+* UnicodeUtils.isSurrogatePair(str,index)，判断str[index]是否UTF16编码代理对，以SurrogatePair起始。
+* UnicodeUtils.strlen(str)，BMP字符集直接返回长度，非BMP字符集两位起跳。
+* UnicodeUtils.substring(str,start,end)，BMP字符集直接以参数截取字符，非BMP字符集两位起跳。
+* UnicodeUtils.substr(str,start,length)， BMP字符集直接以参数截取字符，非BMP字符集两位起跳。
 
 
-## 数据转换
 
-### 数据交互
+## 数据交互
+
+### 发送请求
 
 #### fetch
 
@@ -108,6 +130,20 @@
 #### fetchWithRetries
 
 * fetchWithRetries(url,{fetchTimeout,retryDelays})请求失败或超时后，尝试重新发送请求。参数fetchTimeout设定超时时间，超时尝试重新发送请求；参数retryDelays的长度限定尝试发送请求的次数，值限定尝试请求与上一次请求的时间间隔。
+
+### 媒体文件类型
+
+#### PhotosMimeType
+
+* PhotosMimeType.isImage|isJpeg(mimetype)，用于判断媒体文件类型是否图片。
+
+#### DataTransfer
+
+* new DataTransfer(data)，资源类型判断或或获取资源。
+
+
+
+## 数据转换
 
 ### 字符串
 
@@ -284,11 +320,19 @@
 
 #### performance
 
-通过window.performance作性能检测用。
+* 通过window.performance作性能检测用。
 
 #### performanceNow
 
-performanceNow()，获取页面开始加载到js代码执行时的时间戳，可用于计算代码执行的耗时。
+* performanceNow()，获取页面开始加载到js代码执行时的时间戳，可用于计算代码执行的耗时。
+
+#### UserAgentData
+
+* UserAgentData.browserArchitecture | browserFullVersion | browserMinorVersion | browserName | browserVersion | deviceName | engineName | engineVersion | platformArchitecture | platformName | platformVersion | platformFullVersion，通过ua-parser-js模块解析window.navigator.userAgent，获取系统、设备、浏览器、cpu、引擎等相关数据。
+
+#### UserAgentData
+
+* UserAgent.isBrowser | isBrowserArchitecture | isDevice | isEngine | isPlatform | isPlatformArchitecture，校验浏览器版本等信息是否匹配特定条件。
 
 
 ### 节点操作
@@ -390,6 +434,15 @@ performanceNow()，获取页面开始加载到js代码执行时的时间戳，�
 * getViewportDimensions()，获取页面的宽高，包含滚动条。
 * getViewportDimensions.withoutScrollbars()，获取页面的宽高，不包含滚动条。
 
+#### nativeRequestAnimationFrame
+
+* nativeRequestAnimationFrame(cb)，cb中操纵dom节点实现动画，借助window.requestAnimationFrame实现。
+
+#### requestAnimationFrame
+
+* requestAnimationFrame(cb)，当浏览器不支持window.requestAnimationFrame，通过setTimeout实现延迟执行回调cb，以实现动画。
+
+
 
 ### 事件
 
@@ -406,6 +459,10 @@ performanceNow()，获取页面开始加载到js代码执行时的时间戳，�
 #### Keys
 
 * 通过键盘按键获取对应的键盘码，如Keys.ESC=27。
+
+#### TouchEventUtils
+
+* TouchEventUtils.extractSingleTouch(nativeEvent)，获取触碰事件touchObj对象，以得到PageX等属性。
 
 
 
