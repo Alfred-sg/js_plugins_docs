@@ -117,6 +117,37 @@
 * UnicodeUtils.substring(str,start,end)，BMP字符集直接以参数截取字符，非BMP字符集两位起跳。
 * UnicodeUtils.substr(str,start,length)， BMP字符集直接以参数截取字符，非BMP字符集两位起跳。
 
+#### UnicodeUtilsExtra
+
+* formatCodePoint(codePoint)，Unicode字符输出，U+XXXX、U+XXXXX、U+XXXXXX形式。
+* getCodePointsFormatted(str)，将字符串转化成unicode字符集数组，高位缺失则补充。
+* zeroPaddedHex(codePoint,len)，Unicode字符高位补充，"1"补充为"0001"。
+* phpEscape(str)、jsEscape(str)、cEscape(str)、objcEscape(str)、pyEscape(str)，转化成特定语言的字符串形式。
+
+#### UnicodeBidiDirection
+
+* NEUTRAL、LTR、RTL，获取"NEUTRAL"、"LTR"、"RTL"文本取向字符串。
+* isStrong(dir)，判断dir是否"LTR"、"RTL"中的一个。
+* getHTMLDir(dir)，获取小写形式的"ltr"或"rtl"。
+* getHTMLDirIfDifferent(dir,otherDir)，当dir不等于otherDir时，以dir转化获取"ltr"或"rtl"。
+* setGlobalDir、getGlobalDir、initGlobalDir设置、获取或初始化设置缓存变量globalDir，初始化默认值为"ltr"。
+
+#### UnicodeBidi
+
+缺省。
+
+#### UnicodeBidiService
+
+缺省。
+
+#### UnicodeCJK
+
+缺省。
+
+#### UnicodeHangulKorean
+
+缺省。
+
 
 
 ## 数据交互
@@ -330,7 +361,7 @@
 
 * UserAgentData.browserArchitecture | browserFullVersion | browserMinorVersion | browserName | browserVersion | deviceName | engineName | engineVersion | platformArchitecture | platformName | platformVersion | platformFullVersion，通过ua-parser-js模块解析window.navigator.userAgent，获取系统、设备、浏览器、cpu、引擎等相关数据。
 
-#### UserAgentData
+#### UserAgent
 
 * UserAgent.isBrowser | isBrowserArchitecture | isDevice | isEngine | isPlatform | isPlatformArchitecture，校验浏览器版本等信息是否匹配特定条件。
 
