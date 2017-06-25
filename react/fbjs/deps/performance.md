@@ -5,6 +5,7 @@
 ## 参考
 
 [前端性能监控方案window.performance 调研(转)](http://www.cnblogs.com/sunshq/p/5312231.html)
+[初探 performance - 监控网页与程序性能](http://www.07net01.com/2015/09/920822.html)
 
 ## 源码
 
@@ -93,7 +94,13 @@
     //          // 2即TYPE_BACK_FORWARD通过前进后退按钮访问；255即TYPE_UNDEFINED，非上述方式访问
     //          type
     //      },
-    //      now:()=>{}// fetchStart到现在的微秒数
+    //      now:()=>{},// fetchStart到现在的微秒数
+    //      mark:(markName)=>{},// 以markName标记保存一个时间戳
+    //      measure:(measureName,markName1,markName2),// 计算mark方法添加markName1、markName2的差值，并以measureName标记保存该差值；markName2置空，与当前时间作比较
+    //      getEntriesByType:("mark|measure")=>{},// 获取所有mark方法或measure方法缓存的时间戳
+    //      getEntriesByName:([markName|measureName])=>{},// 获取单个mark方法或measure方法缓存的时间戳
+    //      clearMarks:([markName])=>{},// 清空特定或所有mark方法缓存的时间戳
+    //      clearMeasures:([measureName])=>{},// 清空特定或所有measure方法缓存的时间戳
     // }
     
     // 计算性能指标
