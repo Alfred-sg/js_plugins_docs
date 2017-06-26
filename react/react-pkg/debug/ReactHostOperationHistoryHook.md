@@ -12,7 +12,7 @@ debug相关。
     
     var history = [];
     
-    // 变更样式、节点、节点属性缓存操作信息；通过ReactDebugTool注入组件实例化、挂载等过程中
+    // 变更样式、节点、节点属性缓存操作信息[{type,instanceID,payload}]，type为操作类型，instanceID为关联的ReactDomComponent实例，payload为操作内容；通过ReactDebugTool注入组件实例化、挂载等过程中
     var ReactHostOperationHistoryHook = {
       onHostOperation: function (operation) {
         history.push(operation);
