@@ -10,7 +10,7 @@ debug模式即本地开发时，用于获取节点的构建信息；通过ReactD
 
     'use strict';
     
-    // react报错处理，用于提供文档地址
+    // reactProdInvariant(code)，线上环境报错，提示facebook文档
     var _prodInvariant = require('./reactProdInvariant');
     
     // 缓存当前被实例化的内部组件实例，如ReactCompositeComponent等，用于调试、校验ReactElement等

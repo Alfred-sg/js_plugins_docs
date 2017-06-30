@@ -49,7 +49,7 @@
     // ReactInstrumentation.debugTool，本地开发环境引用ReactDebugTool调试函数库
     var ReactInstrumentation = require('./ReactInstrumentation');
     
-    // 记录当前被挂载的组件
+    // 缓存当前被实例化的内部组件实例，如ReactCompositeComponent等，用于调试、校验ReactElement
     var ReactCurrentOwner = require('react/lib/ReactCurrentOwner');
     
     // 用于挂载组件
@@ -60,7 +60,7 @@
     
     var emptyFunction = require('fbjs/lib/emptyFunction');
     
-    // 扁平化子组件后，执行某函数
+    // flattenChildren(children,selfDebugID)，将子元素以对象形式{reactId: reactNode}输出
     var flattenChildren = require('./flattenChildren');
     
     var invariant = require('fbjs/lib/invariant');
