@@ -4,7 +4,7 @@
 
 子组件操控mixins。
 
-挂载、更新或卸载ReactDomComponent组件实例下的子组件。
+挂载、更新或卸载ReactDomComponent组件实例下的子组件。调用ReactChildReconciler模块完成子组件的挂载、更新及卸载。
 
 参数transaction管理生命周期方法的执行时机，对外提供transaction.getReactMountReady().enqueue(fn)添加生命周期方法。
 参数context由父组件注入的context对象，构成当前组件实例的this.context属性。
