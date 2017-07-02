@@ -4,7 +4,7 @@
 
 react节点操作。
 
-* new DOMLazyTree(node)，创建DOMLazyTree实例，插入子节点或设置innerHTML或设置text后，调用insertTreeBefore静态方法插入文档。IE8-11或Edge，先缓存子节点、innerHTML、text，等待insertTreeBefore静态方法执行时将子节点、innerHTML、text插入tree.node中，再将tree.node插入文档；其他浏览器，直接将子节点、innerHTML、text插入tree.node，insertTreeBefore静态方法执行时再将tree.node插入文档。
+* DOMLazyTree(node)，创建DOMLazyTree对象，插入子节点或设置innerHTML或设置text后，调用insertTreeBefore静态方法插入文档。IE8-11或Edge，先缓存子节点、innerHTML、text，等待insertTreeBefore静态方法执行时将子节点、innerHTML、text插入tree.node中，再将tree.node插入文档；其他浏览器，直接将子节点、innerHTML、text插入tree.node，insertTreeBefore静态方法执行时再将tree.node插入文档。
 * insertTreeBefore(parentNode,tree,referenceNode)，将tree.node插入文档内的parentNode节点下，并为tree填充IE8-11或Edge浏览器下缓存的tree.children或tree.html或tree.text（其他浏览器子节点、innerHTML、text事先插入tree.node节点中）。
 * replaceChildWithTree(oldNode,newTree)，将节点从oldNode替换成newTree.node，并为tree填充IE8-11或Edge浏览器下缓存tree.children或tree.html或tree.text。
 * queueChild(tree,children)，设置tree.node节点的children。IE8-11或Edge，先存储于tree.children中，再等待insertTreeBefore方法执行时插入文档；其他浏览器直接将子节点插入tree.node，insertTreeBefore方法执行时只将tree.node插入文档。
