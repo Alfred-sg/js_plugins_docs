@@ -29,7 +29,7 @@ react节点操作。
     //    ReactDebugTool中的节点操作缓存记录为'insert child'、'move child'、'replace children'、'replace text'或'remove child'
     var DOMChildrenOperations = require('./DOMChildrenOperations');
     
-    // dom节点到ReactDomComponent组件实例的映射
+    // ReactDOMComponentTree.getNodeFromInstance获取ReactDomComponent实例的对应节点
     var ReactDOMComponentTree = require('./ReactDOMComponentTree');
     
     var ReactDOMIDOperations = {

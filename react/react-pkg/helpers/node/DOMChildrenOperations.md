@@ -19,7 +19,8 @@ react节点操作。
     // markup可以是字符串或嵌套对象形式
     var Danger = require('./Danger');
     
-    // dom节点到ReactDomComponent组件实例的映射
+    // ReactDOMComponentTree.getInstanceFromNode(node)
+    //  获取与node对应的ReactDomComponent或ReactDOMTextComponent实例
     var ReactDOMComponentTree = require('./ReactDOMComponentTree');
     
     // 本地开发环境调用ReactDebugTool调试函数库
